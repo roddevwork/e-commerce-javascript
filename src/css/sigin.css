@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+:root {
+	--primary-color: rgb(255, 99, 71);
+	--primary-text: rgb(253, 253, 253);
+	--bg-color-primary: rgb(34, 34, 34);
+	--bg-color-secondary: rgba(0, 0, 0, 0.8);
+	--bg-color-third: rgb(51, 51, 51);
+	--font-primary: 'Roboto', Arial, Helvetica, sans-serif;
+}
+
+*,
+*::after,
+*::before {
+	margin: 0;
+	padding: 0;
+	box-sizing: inherit;
+	text-decoration: none;
+	list-style: none;
+	font-family: var(--font-primary);
+}
+
+body {
+	width: 100%;
+	margin: 0 auto;
+	padding: 0;
+	color: var(--primary-text);
+	background-color: var(--bg-color-primary);
+}
+
+main {
+	width: 90%;
+	height: 100vh;
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.sigin-section {
+	width: 100%;
+	max-width: 400px;
+	position: relative;
+	padding: 2rem;
+	border-radius: 8px;
+	text-align: center;
+	background-color: var(--bg-color-secondary);
+}
+.sigin-section:hover {
+	border: 1px solid var(--primary-text);
+}
+.close-link {
+	position: absolute;
+	top: 1rem;
+	left: 1rem;
+	font-size: 1.5rem;
+	color: var(--primary-text);
+	text-decoration: none;
+}
+.close-link:hover {
+	color: var(--primary-color);
+}
+
+.sigin-section h1 {
+	margin-bottom: 1rem;
+}
+
+.sigin-section form {
+	display: flex;
+	flex-direction: column;
+}
+
+.sigin-section label {
+	margin: 0.5rem 0;
+}
+
+.sigin-section input {
+	padding: 0.5rem;
+	border: none;
+	border-radius: 4px;
+	margin-bottom: 1rem;
+	background-color: var(--primary-text);
+}
+
+.sigin-section button {
+	padding: 0.75rem;
+	margin-top: 20px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	color: var(--primary-text);
+	background-color: var(--bg-color-third);
+}
+.sigin-section button:hover {
+	border: 1px solid var(--primary-text);
+	color: var(--primary-color);
+}
+
+.sigin-section p {
+	margin-top: 1rem;
+}
+
+.login-link {
+	color: rgb(37, 37, 235);
+}
+
+.back-link {
+	display: inline-block;
+	margin-top: 1rem;
+	color: var(--primary-color);
+	text-decoration: underline;
+}
+.back-link:hover {
+	font-size: 1.3rem;
+}
+
+@media (min-width: 768px) {
+	body {
+		padding: 2rem;
+	}
+
+	.sigin-section {
+		padding: 3rem;
+	}
+}
+
+@media (min-width: 1024px) {
+	body {
+		padding: 3rem;
+	}
+
+	.sigin-section {
+		padding: 4rem;
+	}
+}
