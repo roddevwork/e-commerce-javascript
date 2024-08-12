@@ -1,16 +1,17 @@
-import productsData from './src/js/data.js'
+import { appState, productsData } from './src/js/data.js'
 
 const productsContainer = document.querySelector('.cards-container')
+const showMoreCardsBtn = document.querySelector('.btn-load')
 
 //  LOCAL STORAGE
 let cart = JSON.parse(localStorage.getItem('cart')) || []
 // funcion para guardar carrito en el localstorage
-const saveCart = () => {
+const saveCartToLocalStorage = () => {
 	localStorage.setItem('cart', JSON.stringify(cart))
 }
 
 // funcion crear template producto
-const createProductTemplate = (product) => {
+const generateProductCardHTML = (product) => {
 	const { id, title, img, price, price_offer } = product
 
 	return `<div class="card">
@@ -24,14 +25,32 @@ const createProductTemplate = (product) => {
 }
 
 // Funcion renderizar productos en carrito
-const renderProducts = (productsList) => {
+const renderProductsToDOM = (productsList) => {
 	productsContainer.innerHTML += productsList
-		.map(createProductTemplate)
+		.map(generateProductCardHTML)
 		.join('')
 }
 
-// Funcion main
-const init = () => {
-	renderProducts(productsData)
+// Funcion para saber el ultimo indice de los productos
+const getLastProductIndexInState = () => {
+	let { products } = appState
+	return products.length - 1
 }
-init()
+
+// Funcion para manejar el paginado
+const handleShowMoreProducts = () => {
+	appState.currentProductsIndex += 1
+	let { products, currentProductsIndex } = appState
+	renderProductsToDOM(products[currentProductsIndex])
+	// Verificar si ya no hay mas productos
+	if (currentProductsIndex === getLastProductIndexInState()) {
+		showMoreCardsBtn.style.display = 'none'
+	}
+}
+
+// Funcion main
+const initializeApp = () => {
+	renderProductsToDOM(appState.products[0])
+	showMoreCardsBtn.addEventListener('click', handleShowMoreProducts)
+}
+initializeApp()

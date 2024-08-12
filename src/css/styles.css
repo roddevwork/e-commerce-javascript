@@ -219,7 +219,6 @@ button .menu-btn {
 }
 
 /* -> Products Section */
-/* -> Products Section */
 #products {
 	padding: calc(var(--header-height) + 10px) 50px 10px 10px;
 	text-align: center;
@@ -303,6 +302,11 @@ button .menu-btn {
 .card-btn:hover {
 	border: 1px solid var(--primary-text);
 	color: var(--primary-color);
+	background-color: var(--bg-color-secondary);
+}
+.btn-load {
+	margin-top: 20px;
+	padding: 10px 20px;
 	background-color: var(--bg-color-secondary);
 }
 

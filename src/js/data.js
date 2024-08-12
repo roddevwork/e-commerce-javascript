@@ -1,19 +1,23 @@
-// import gtaOnline from '../assets/img/cards/1-grand-theft-auto-online.jpeg'
-// import MarvelAvengers from '../assets/img/cards/2-Marvels-Avengers-DE.jpeg'
-// import noManSky from '../assets/img/cards/3-No-Mans-Sky.jpeg'
-// import Valheim from '../assets/img/cards/4-Valheim.jpeg'
-// import MortalKombat from '../assets/img/cards/5-Mortal-Kombat-11-Ultimate.jpeg'
-// import Stray from '../assets/img/cards/6-Stray.jpeg'
-// import Fifa23 from '../assets/img/cards/7-Fifa2023.jpeg'
-// import ForzaHorizonte from '../assets/img/cards/8-ForzaHorizon5.jpeg'
-// import JurassicWorld from '../assets/img/cards/9-JurassicWorld.jpeg'
-// import Dirt5 from '../assets/img/cards/10-Dirt5.jpeg'
+import gtaOnline from '../assets/img/cards/1-grand-theft-auto-online.jpeg'
+import MarvelAvengers from '../assets/img/cards/2-Marvels-Avengers-DE.jpeg'
+import noManSky from '../assets/img/cards/3-No-Mans-Sky.jpeg'
+import Valheim from '../assets/img/cards/4-Valheim.jpeg'
+import MortalKombat from '../assets/img/cards/5-Mortal-Kombat-11-Ultimate.jpeg'
+import Stray from '../assets/img/cards/6-Stray.jpeg'
+import Fifa23 from '../assets/img/cards/7-Fifa2023.jpeg'
+import ForzaHorizonte from '../assets/img/cards/8-ForzaHorizon5.jpeg'
+import JurassicWorld from '../assets/img/cards/9-JurassicWorld.jpeg'
+import Dirt5 from '../assets/img/cards/10-Dirt5.jpeg'
+import StreetsOfRage4 from '../assets/img/cards/11-StreetsOfRage4.jpeg'
+import footballManager2024 from '../assets/img/cards/12-footballManager2024.jpeg'
+import HotWheelsUnleashed2 from '../assets/img/cards/13-HotWheelsUnleashed2.jpeg'
+import NickelodeonAllStarBrawl2 from '../assets/img/cards/14-NickelodeonAllStarBrawl2.jpeg'
 
-const productsData = [
+export const productsData = [
 	{
 		id: 1,
 		title: 'Grand Theft Auto Online',
-		img: 'src/assets/img/cards/1-grand-theft-auto-online.jpeg',
+		img: gtaOnline,
 		price: 2000,
 		price_offer: 1500,
 		editor: 'Rockstar Games',
@@ -26,7 +30,7 @@ const productsData = [
 	{
 		id: 2,
 		title: "Marvel's Avengers-DE",
-		img: 'src/assets/img/cards/2-Marvels-Avengers-DE.jpeg',
+		img: MarvelAvengers,
 		price: 3000,
 		price_offer: 2000,
 		editor: 'Crystal Dynamics, Eidos-Montréal',
@@ -46,7 +50,7 @@ const productsData = [
 	{
 		id: 3,
 		title: "No Man's Sky",
-		img: 'src/assets/img/cards/3-No-Mans-Sky.jpeg',
+		img: noManSky,
 		price: 1000,
 		price_offer: 700,
 		editor: 'Hello Games',
@@ -59,7 +63,7 @@ const productsData = [
 	{
 		id: 4,
 		title: 'Valheim',
-		img: 'src/assets/img/cards/4-Valheim.jpeg',
+		img: Valheim,
 		price: 1000,
 		price_offer: 700,
 		editor: 'Iron Gate',
@@ -72,7 +76,7 @@ const productsData = [
 	{
 		id: 5,
 		title: 'Mortal Kombat 11 Ultimate',
-		img: 'src/assets/img/cards/5-Mortal-Kombat-11-Ultimate.jpeg',
+		img: MortalKombat,
 		price: 1000,
 		price_offer: 700,
 		editor: 'NetherRealm Studios',
@@ -85,7 +89,7 @@ const productsData = [
 	{
 		id: 6,
 		title: 'Stray',
-		img: 'src/assets/img/cards/6-Stray.jpeg',
+		img: Stray,
 		price: 3600,
 		price_offer: 2300,
 		editor: 'BlueTwelve Studio',
@@ -98,7 +102,7 @@ const productsData = [
 	{
 		id: 7,
 		title: 'Fifa 23',
-		img: 'src/assets/img/cards/7-Fifa2023.jpeg',
+		img: Fifa23,
 		price: 7900,
 		price_offer: 5900,
 		editor: 'EA Canada',
@@ -111,7 +115,7 @@ const productsData = [
 	{
 		id: 8,
 		title: 'Forza Horizonte 5',
-		img: 'src/assets/img/cards/8-ForzaHorizon5.jpeg',
+		img: ForzaHorizonte,
 		price: 11900,
 		price_offer: 9900,
 		editor: 'Playground Games',
@@ -119,12 +123,12 @@ const productsData = [
 		lanzamiento: '9/11/2021',
 		category: ['Aventura', 'Carreras', 'Simuladores', 'Deportes'],
 		description:
-			'Perdido, solo y separado de su familia, un gato callejero debe desentrañar un antiguo misterio para escapar de una ciudad olvidada.Stray es un juego de aventuras de un gato en tercera persona ambientado en los callejones iluminados por el neón de una ciberciudad decadente y sus turbios rincones. Deambula por los alrededores, defiéndete de amenazas imprevistas y resuelve los misterios de este lugar poco acogedor habitado por androides inocentes y criaturas peligrosas.Ve el mundo a través de los ojos de un gato callejero e interactúa con el escenario de formas lúdicas. Sé sigiloso, ágil, tonto y, a veces, lo más molesto que puedas con los extraños habitantes de este mundo extraño.Por el camino, el gato se hará amigo de un pequeño dron volador, conocido como B-12. Con la ayuda de este nuevo compañero, la pareja intentará encontrar una salida.'
+			'Explora los vibrantes paisajes del mundo abierto de México con acción de conducción ilimitada en cientos de los mejores autos del mundo. Aventúrate en un mundo en constante evolución con desafíos que cambian cada semana y disfruta de Horizon Arcade, eventos de juego cooperativo que te permiten sumergirte en la diversión sin menús ni pantallas de carga'
 	},
 	{
 		id: 9,
 		title: 'Jurassic World Evolution 2',
-		img: 'src/assets/img/cards/9-JurassicWorld.jpeg',
+		img: JurassicWorld,
 		price: 6500,
 		price_offer: 5100,
 		editor: 'Frontier Developments',
@@ -137,7 +141,7 @@ const productsData = [
 	{
 		id: 10,
 		title: 'DIRT 5',
-		img: 'src/assets/img/cards/10-Dirt5.jpeg',
+		img: Dirt5,
 		price: 999,
 		price_offer: 700,
 		editor: 'Codemasters',
@@ -146,7 +150,75 @@ const productsData = [
 		category: ['Aventura', 'Carreras', 'Deportes'],
 		description:
 			'Déjate llevar.Respetando el legado y el ADN de la franquicia, DIRT 5 escribe un nuevo capítulo en la historia de DIRT, el más atrevido y arriesgado hasta el momento. Las nuevas funcionalidades, innovaciones y el original enfoque de DIRT 5 lo convierten en un foco de carreras, estilo y cultura todoterreno donde constantemente crearás instantes inolvidables.Ábrete camino por el mundo.Viaja a través del mundo y compite en más de 70 rutas únicas distribuidas en 10 distintas ubicaciones internacionales, situadas en entornos dinámicos y sensacionales. Compite sobre hielo en el East River de Nueva York, pasa por debajo del Cristo Redentor de Brasil y deslumbra junto a las auroras boreales de Noruega mientras te enfrentas a tus oponentes en extremas y variables condiciones.Supera los límites con increíbles coches.Hay todo un catálogo de diversos y fascinantes vehículos que puedes conducir. Conquista el terreno más adverso con máquinas treparrocas, explora nuevas ubicaciones con iconos del rally o siente la potencia de 900 bhp de los sprint cars. Rallycross, GT, unlimited trucks, buggies y muscle cars completarán el garaje todoterreno definitivo.Protagoniza una historia repleta de estrellas.Bajo la tutela de un icono de las carreras y la mirada de la afición, deberás convertirte en la nueva estrella de este'
+	},
+	{
+		id: 11,
+		title: 'Streets of Rage 4',
+		img: StreetsOfRage4,
+		price: 899,
+		price_offer: 690,
+		editor: 'Dotemu',
+		public: 'Dotemu',
+		lanzamiento: '30/4/2020',
+		category: ['Coperativo', 'Multijugador', 'Lucha'],
+		description:
+			'El clásico de todos los tiempos Streets of Rage, conocido como Bare Knuckle (ベア・ナックル Bea Nakkuru) en Japón, es una saga de beat ‘em ups famosa por su mecánica de juego intemporal y su música influida por el dance electrónico. Streets of Rage 4 desarrolla el estilo de juego de la trilogía clásica con nuevas mecánicas, magníficos gráficos dibujados a mano y una banda sonora del máximo nivel.Únete a los personajes emblemáticos y a otros nuevos.Streets of Rage 4 recupera a sus personajes emblemáticos: Axel, Blaze y Adam se unen a sus nuevos hermanos de armas Floyd Iraia y Cherry Hunter. Con algunos movimientos nuevos y temas flipantes para escuchar, nuestros héroes están listos para repartir estopa a todo trapo contra un grupo emergente de imprudentes criminales.La nostalgia ataca de nuevo.Se cumple uno de tus sueños. Además de los 5 nuevos personajes, es posible desbloquear y jugar con tus personajes pixelados favoritos de anteriores juegos de Streets of Rage, como Axel, Adam, Blaze, Skate, Max y muchos más, con sus propios efectos retro, en entornos urbanos dibujados a mano en glorioso HD.mpresionantes gráficos dibujados a mano.'
+	},
+	{
+		id: 12,
+		title: 'Football Manager 2024',
+		img: footballManager2024,
+		price: 2999,
+		price_offer: 1500,
+		editor: 'Sports Interactive',
+		public: 'SEGA',
+		lanzamiento: '6/11/2023',
+		category: ['Coperativo', 'Multijugador', 'Deportes', 'Futbol'],
+		description:
+			'Hazte con el equipo de tus sueños y ficha a jugadores de élite que te lleven a la grandeza futbolística en Football Manager 2024 Console.Cuando llegue el momento de enfrentarse al rival, el apoyo de tu cuerpo técnico te ayudará a mejorar el rendimiento de tu equipo en ambos extremos del campo.Haz que cada ventaja cuente cuando te enfrentes a los mejores equipos. ¿Tienes lo necesario para ganar los mayores premios del fútbol, mánager?'
+	},
+	{
+		id: 13,
+		title: 'Hot Wheels Unleashed 2',
+		img: HotWheelsUnleashed2,
+		price: 1999,
+		price_offer: 999,
+		editor: 'Milestone',
+		public: 'Milestone',
+		lanzamiento: '19/10/2023',
+		category: ['Multijugador', 'Aventura', 'Deportes', 'Carreras'],
+		description:
+			'¡LLEGÓ LA SEGUNDA PARTE!.Si la primera te pareció genial, ¡espera a ver las nuevas características que tenemos preparadas!.MÁS AUTOS: MÁS DIVERSIÓN.Haz lugar en tu estantería virtual porque ahora podrás conducir más de 130 autos e incluso otros tipos de vehículos. Además de los Hot Wheels™ Originals, también tendrás acceso a los Hot Wheels™ Monster Trucks y a otros vehículos del mundo del entretenimiento. Podrás conducir motocicletas y cuatriciclos con estilos de conducción únicos que te permitirán completar cada pista con la mejor estrategia posible.Un nuevo sistema determinará las categorías de los vehículos, que podrás mejorar en el árbol de habilidades para aumentar su rendimiento. ¡Convierte tu vehículo en una máquina imparable!'
+	},
+	{
+		id: 14,
+		title: 'Nickelodeon All-Star Brawl 2',
+		img: NickelodeonAllStarBrawl2,
+		price: 1999,
+		price_offer: 1399,
+		editor: 'Fair Play Labs',
+		public: 'GameMill Entertainment',
+		lanzamiento: '13/11/2023',
+		category: ['Coperativo', 'Multijugador', 'Deportes', 'Futbol'],
+		description:
+			'Nickelodeon All-Star Brawl 2 te permite entrar en la acción con la más grande y mejor variedad de personajes hasta la fecha, ¡que ahora incluye personajes nuevos como Bob Esponja Pantalones Cuadrados, las Tortugas Ninja, Calamardo Tentáculos, Jimmy Neutrón y más!.Elige a tus peleadores favoritos, domina sus movimientos únicos y usa sus poderosos supermovimientos para acabar con tus oponentes, ya sea luchando contra amigos o en la campaña de un solo jugador.'
 	}
 ]
 
-export default productsData
+// -> Paginado de la renderizacion:
+
+// / Dividir el array de productos en subarrays de un tamaño específico
+const divideProductsInParts = (size) => {
+	let productsList = []
+	for (let i = 0; i < productsData.length; i += size) {
+		productsList.push(productsData.slice(i, i + size))
+	}
+	return productsList
+}
+
+export const appState = {
+	products: divideProductsInParts(4),
+	productsLimit: divideProductsInParts(4).length,
+	currentProductsIndex: 0,
+	activeFilter: null
+}
