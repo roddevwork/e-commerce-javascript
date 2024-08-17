@@ -54,6 +54,11 @@ body {
 	max-width: var(--max-width);
 	margin: 0 auto;
 }
+.active {
+	border: 1px solid var(--primary-text) !important;
+	color: var(--primary-color) !important;
+	background-color: var(--bg-color-secondary) !important;
+}
 
 /* -> Header */
 #header {
@@ -224,7 +229,15 @@ button .menu-btn {
 	text-align: center;
 }
 .products-title {
-	font-size: 1.5rem;
+	font-size: 1.8rem;
+}
+
+.categories-container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 5px;
+	margin: 20px 0;
 }
 
 .cards-container {
@@ -305,8 +318,9 @@ button .menu-btn {
 	background-color: var(--bg-color-secondary);
 }
 .btn-load {
-	margin-top: 20px;
+	display: block;
 	padding: 10px 20px;
+	margin: 20px auto;
 	background-color: var(--bg-color-secondary);
 }
 
@@ -481,7 +495,7 @@ textarea {
 
 	/*  Products Section */
 	.products-title {
-		font-size: 1.8rem;
+		font-size: 2rem;
 	}
 	.cards-container {
 		flex-direction: row;

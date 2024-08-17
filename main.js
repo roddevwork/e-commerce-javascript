@@ -2,15 +2,20 @@ import { appState, productsData } from './src/js/data.js'
 
 const productsContainer = document.querySelector('.cards-container')
 const showMoreCardsBtn = document.querySelector('.btn-load')
+const categoriesContainer = document.querySelector('.categories-container')
+const categoriesList = document.querySelectorAll('.category')
 
 //  LOCAL STORAGE
 let cart = JSON.parse(localStorage.getItem('cart')) || []
-// funcion para guardar carrito en el localstorage
+
+// -> Funciones:
+
+// Funcion para guardar carrito en el localstorage
 const saveCartToLocalStorage = () => {
 	localStorage.setItem('cart', JSON.stringify(cart))
 }
 
-// funcion crear template producto
+// Funcion crear template producto
 const generateProductCardHTML = (product) => {
 	const { id, title, img, price, price_offer } = product
 
@@ -48,9 +53,74 @@ const handleShowMoreProducts = () => {
 	}
 }
 
+// Funcion para no mostrar el boton de ver mas cuando hay filtro activado
+const setShowMoreVisibility = () => {
+	if (appState.activeFilter) {
+		showMoreCardsBtn.style.display = 'none'
+	} else {
+		// Si no hay un filtro activo y hay más productos por mostrar, mostrar el botón
+		const isLastIndex =
+			appState.currentProductsIndex === getLastProductIndexInState()
+		showMoreCardsBtn.style.display = isLastIndex ? 'none' : 'block'
+	}
+}
+
+// Funcion para cambiar el estado de los botones
+const changeBtnAvtiveState = (selectedCategory) => {
+	const categories = [...categoriesList]
+	categories.forEach((categoryBtn) => {
+		if (categoryBtn.dataset.category !== selectedCategory) {
+			categoryBtn.classList.remove('active')
+			return
+		}
+		categoryBtn.classList.add('active')
+	})
+}
+
+// Funcion para cambiar el estado del filtro
+const changeFilterState = (btn) => {
+	appState.activeFilter = btn.dataset.category
+	changeBtnAvtiveState(appState.activeFilter)
+	setShowMoreVisibility(appState.activeFilter)
+}
+
+// Funcion para saber si el boton de filtro es inactivo o no
+const isInactiveFilterBtn = (element) => {
+	return (
+		element.classList.contains('category') &&
+		!element.classList.contains('active')
+	)
+}
+
+// Funcion que aplica un filtro
+const applyFilter = ({ target }) => {
+	if (!isInactiveFilterBtn(target)) {
+		return
+	}
+
+	changeFilterState(target)
+	productsContainer.innerHTML = ''
+	if (appState.activeFilter) {
+		renderFilteredProducts()
+		appState.currentProductsIndex = 0
+	} else {
+		renderProductsToDOM(appState.products[0])
+	}
+	setShowMoreVisibility() // Llamar después de renderizar los productos
+}
+
+// Funcion para renderizar los productos filtrados
+const renderFilteredProducts = () => {
+	const filteredProducts = productsData.filter((product) => {
+		return product.category.includes(appState.activeFilter)
+	})
+	renderProductsToDOM(filteredProducts)
+}
+
 // Funcion main
 const initializeApp = () => {
 	renderProductsToDOM(appState.products[0])
 	showMoreCardsBtn.addEventListener('click', handleShowMoreProducts)
+	categoriesContainer.addEventListener('click', applyFilter)
 }
 initializeApp()
