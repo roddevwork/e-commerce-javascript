@@ -79,27 +79,34 @@ body {
 	height: auto;
 }
 
-nav ul {
+.nav-menu {
+	width: 100%;
 	display: none;
 	flex-direction: column;
-	list-style: none;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	z-index: 999;
+	text-align: center;
+	background-color: var(--bg-color-secondary);
+	opacity: 0.9;
+	transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
-nav li {
+.nav-menu li {
 	margin: 0.5rem 0;
 }
 
-nav a {
+.nav-menu a {
 	display: block;
 	padding: 0.5rem 1rem;
-	color: var(--first-text);
+	color: var(--primary-text);
 }
-nav a:hover {
-	font-weight: var(--bold);
+.nav-menu a:hover {
+	font-weight: var(--font-bold);
 	color: var(--primary-color);
 }
 
-/* Burger menu */
 .menu-btn {
 	width: 60px;
 	height: 60px;
@@ -109,31 +116,19 @@ nav a:hover {
 	font-size: 2.5rem;
 	line-height: 70px;
 	cursor: pointer;
+	border: none;
 	color: var(--primary-color);
+	background: none;
+	transition: color 0.3s ease;
 }
-
-.menu-toggle {
-	display: none;
-}
-button .menu-btn {
-	opacity: 0;
-}
-
-.menu-toggle:checked + .menu-btn + ul {
-	width: 100%;
-	display: flex;
-	position: absolute;
-	top: 100%;
-	left: 0;
-	z-index: 999;
-	text-align: center;
-	background-color: var(--bg-color-secondary);
-}
-.menu-toggle:checked + .menu-btn {
+.menu-btn-active {
 	color: var(--primary-text);
 }
 
-/* -> Menu */
+.menu-open {
+	display: flex;
+	flex-direction: column;
+}
 
 /* -> Hero Section */
 #hero {
@@ -457,22 +452,7 @@ textarea {
 
 /* -> Media Queries Tablets */
 @media (min-width: 768px) {
-	/*  Header */
-	nav ul {
-		display: flex;
-		flex-direction: row;
-	}
-
-	nav ul li {
-		margin: 0 0.5rem;
-	}
-
-	.menu-btn {
-		display: none;
-	}
-
 	/*  Hero Section */
-
 	.hero-content a {
 		padding: 15px 30px;
 		font-size: 1.5rem;
@@ -546,10 +526,20 @@ textarea {
 /* -> Media Queries Desktop */
 @media (min-width: 1024px) {
 	/*  Header */
-	nav ul li {
+	.nav-menu {
+		width: 100%;
+		position: static;
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-end;
+		background: none;
+	}
+	.nav-menu li {
 		font-size: 1.2rem;
 	}
-
+	.menu-btn {
+		display: none;
+	}
 	/*  Hero Section */
 	.hero-content a {
 		padding: 20px 40px;

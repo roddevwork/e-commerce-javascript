@@ -1,11 +1,16 @@
 import { appState, productsData } from './src/js/data.js'
 
+// Elementos relacionados con el menú hamburguesa
+const menuBtn = document.querySelector('#menu-btn')
+const menu = document.querySelector('#nav-menu')
+
+// Elementos relacionados con los productos
 const productsContainer = document.querySelector('.cards-container')
 const showMoreCardsBtn = document.querySelector('.btn-load')
 const categoriesContainer = document.querySelector('.categories-container')
 const categoriesList = document.querySelectorAll('.category')
 
-//  LOCAL STORAGE
+//  Local Storage
 let cart = JSON.parse(localStorage.getItem('cart')) || []
 
 // -> Funciones:
@@ -13,6 +18,18 @@ let cart = JSON.parse(localStorage.getItem('cart')) || []
 // Funcion para guardar carrito en el localstorage
 const saveCartToLocalStorage = () => {
 	localStorage.setItem('cart', JSON.stringify(cart))
+}
+
+// Función para manejar el menú hamburguesa
+const handleMenuToggle = () => {
+	menu.classList.toggle('menu-open')
+	menuBtn.classList.toggle('menu-btn-active')
+}
+
+// Función para manejar el cierre del menú al hacer clic en un enlace
+const handleMenuItemClick = () => {
+	menu.classList.remove('menu-open')
+	menuBtn.classList.toggle('menu-btn-active')
 }
 
 // Funcion crear template producto
@@ -97,7 +114,6 @@ const applyFilter = ({ target }) => {
 	if (!isInactiveFilterBtn(target)) {
 		return
 	}
-
 	changeFilterState(target)
 	productsContainer.innerHTML = ''
 	if (appState.activeFilter) {
@@ -117,8 +133,14 @@ const renderFilteredProducts = () => {
 	renderProductsToDOM(filteredProducts)
 }
 
-// Funcion main
+// Funcion Inicial
 const initializeApp = () => {
+	// Inicialización del menú hamburguesa
+	menuBtn.addEventListener('click', handleMenuToggle)
+	menu.querySelectorAll('a').forEach((link) => {
+		link.addEventListener('click', handleMenuItemClick)
+	})
+	// Inicialización de los productos
 	renderProductsToDOM(appState.products[0])
 	showMoreCardsBtn.addEventListener('click', handleShowMoreProducts)
 	categoriesContainer.addEventListener('click', applyFilter)
