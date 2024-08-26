@@ -10,6 +10,24 @@ const showMoreCardsBtn = document.querySelector('.btn-load')
 const categoriesContainer = document.querySelector('.categories-container')
 const categoriesList = document.querySelectorAll('.category')
 
+// Elementos relacionados con el formulario de contacto
+const contactForm = document.querySelector('#contact-form')
+const inputName = document.querySelector('#nombre')
+const inputLastName = document.querySelector('#apellido')
+const inputEmail = document.querySelector('#email')
+const inputMensaje = document.querySelector('#mensaje')
+const btnSubmit = document.querySelector('.button-group button[type="submit"]')
+const btnReset = document.querySelector('.button-group button[type="reset"]')
+const spinner = document.querySelector('#spinner')
+
+// Variables
+const emailObj = {
+	nombre: '',
+	apellido: '',
+	email: '',
+	mensaje: ''
+}
+
 //  Local Storage
 let cart = JSON.parse(localStorage.getItem('cart')) || []
 
@@ -133,6 +151,102 @@ const renderFilteredProducts = () => {
 	renderProductsToDOM(filteredProducts)
 }
 
+// Funcion para validar el email
+const validar = (e) => {
+	const campo = e.target.id.toUpperCase()
+	if (e.target.value.trim() === '') {
+		if (e.target.id !== 'apellido') {
+			mostrarAlerta(`El campo ${campo} es obligatorio`, e.target.parentElement)
+			emailObj[e.target.name] = ''
+			comprobarEmail()
+		}
+		return
+	}
+	if (e.target.id === 'email' && !validarEmail(e.target.value)) {
+		mostrarAlerta('El email no es valido', e.target.parentElement)
+		emailObj[e.target.name] = ''
+		comprobarEmail()
+		return
+	}
+
+	limpiarAlerta(e.target.parentElement)
+	emailObj[e.target.name] = e.target.value.trim().toLowerCase()
+	comprobarEmail()
+}
+
+// Funcion para mostrar alerta
+const mostrarAlerta = (mensaje, referencia) => {
+	limpiarAlerta(referencia)
+
+	const alerta_vacio_parrafo = document.createElement('P')
+	alerta_vacio_parrafo.textContent = mensaje
+	alerta_vacio_parrafo.classList.add('empty-field-alert')
+	referencia.appendChild(alerta_vacio_parrafo)
+}
+
+// Funcion para limpiar alerta
+const limpiarAlerta = (referencia) => {
+	const alerta = referencia.querySelector('.empty-field-alert')
+	if (alerta) {
+		alerta.remove()
+	}
+}
+
+// Funcion para validar email
+const validarEmail = (email) => {
+	const regex = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/
+	return regex.test(email)
+}
+
+// Funcion para comprobar email
+const comprobarEmail = () => {
+	if (
+		emailObj.nombre === '' ||
+		emailObj.email === '' ||
+		emailObj.mensaje === ''
+	) {
+		btnSubmit.style.opacity = '0.5'
+		btnSubmit.style.cursor = 'not-allowed'
+		btnSubmit.disabled = true
+		return
+	}
+	btnSubmit.style.opacity = '1'
+	btnSubmit.style.cursor = 'pointer'
+	btnSubmit.disabled = false
+}
+
+// Funcion para resetear el formulario
+const resetForm = () => {
+	emailObj.nombre = ''
+	emailObj.apellido = ''
+	emailObj.email = ''
+	emailObj.mensaje = ''
+
+	contactForm.reset()
+	comprobarEmail()
+}
+
+// Funcion para enviar email
+const enviarEmail = (e) => {
+	e.preventDefault()
+	spinner.style.display = 'flex'
+
+	setTimeout(() => {
+		spinner.style.display = 'none'
+
+		resetForm()
+
+		const alertaExito = document.createElement('P')
+		alertaExito.classList.add('alerta-exito-enviar')
+		alertaExito.textContent = 'Email enviado correctamente'
+		contactForm.appendChild(alertaExito)
+
+		setTimeout(() => {
+			alertaExito.remove()
+		}, 3000)
+	}, 3000)
+}
+
 // Funcion Inicial
 const initializeApp = () => {
 	// Inicialización del menú hamburguesa
@@ -144,5 +258,15 @@ const initializeApp = () => {
 	renderProductsToDOM(appState.products[0])
 	showMoreCardsBtn.addEventListener('click', handleShowMoreProducts)
 	categoriesContainer.addEventListener('click', applyFilter)
+
+	if (contactForm) {
+		inputName.addEventListener('blur', validar)
+		inputLastName.addEventListener('blur', validar)
+		inputEmail.addEventListener('blur', validar)
+		inputMensaje.addEventListener('input', validar)
+
+		contactForm.addEventListener('submit', enviarEmail)
+		btnReset.addEventListener('click', resetForm)
+	}
 }
 initializeApp()

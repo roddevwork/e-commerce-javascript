@@ -15,6 +15,8 @@
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link rel="stylesheet" href="src/css/styles.css" />
+		<link rel="stylesheet" href="src/css/media.css" />
+		<link rel="stylesheet" href="src/css/spiner.css" />
 		<title>PC Games</title>
 	</head>
 
@@ -28,7 +30,6 @@
 			<nav>
 				<button id="menu-btn" class="menu-btn">☰</button>
 				<ul id="nav-menu" class="nav-menu">
-				<ul>
 					<li><a href="#hero">Inicio</a></li>
 					<li><a href="#about">Nosotros</a></li>
 					<li><a href="#products">Productos</a></li>
@@ -123,66 +124,88 @@
 			<section id="contact" class="section-global">
 				<h2 class="contact-title">Contáctanos</h2>
 
-				<div class="contact-container">
-					<form class="contact-form">
-						<div class="form-group">
-							<label for="nombre">Nombre:</label>
-							<input
-								type="text"
-								id="nombre"
-								name="nombre"
-								placeholder="Escribe tu nombre"
-							/>
-						</div>
-						<div class="form-group">
-							<label for="apellido">Apellido:</label>
-							<input
-								type="text"
-								id="apellido"
-								name="apellido"
-								placeholder="Escribe tu apellido"
-							/>
-						</div>
-						<div class="form-group">
-							<label for="email">Email:</label>
-							<input
-								type="email"
-								id="email"
-								name="email"
-								placeholder="Escribe tu email"
-							/>
-						</div>
-						<div class="form-group">
-							<label for="asunto">Asunto:</label>
-							<textarea
-								id="asunto"
-								name="asunto"
-								rows="4"
-								placeholder="Escribe tu asunto"
-							></textarea>
-						</div>
-						<button class="contact-btn" type="submit">Enviar</button>
-					</form>
+				<section id="contact" class="section-global">
+					<h2 class="contact-title">Contáctanos</h2>
 
-					<div class="contact-info">
-						<p>Correo electrónico: contacto@pcgames.com</p>
-						<p>Teléfono: +55 5555 5555</p>
-						<p>Dirección: Chile 1199 - PLaza Independencia - Mza</p>
-					</div>
+					<div class="contact-container">
+						<div class="form-container">
+							<form id="contact-form" class="contact-form">
+								<div class="form-group">
+									<label for="nombre">Nombre:</label>
+									<input
+										type="text"
+										id="nombre"
+										name="nombre"
+										placeholder="Escribe tu nombre"
+									/>
+								</div>
+								<div class="form-group">
+									<label for="apellido">Apellido:</label>
+									<input
+										type="text"
+										id="apellido"
+										name="apellido"
+										placeholder="Escribe tu apellido (opcional)"
+									/>
+								</div>
+								<div class="form-group">
+									<label for="email">Email:</label>
+									<input
+										type="email"
+										id="email"
+										name="email"
+										placeholder="Escribe tu email"
+									/>
+								</div>
+								<div class="form-group">
+									<label for="mensaje">Mensaje:</label>
+									<textarea
+										id="mensaje"
+										name="mensaje"
+										rows="4"
+										placeholder="Mensaje de Email"
+									></textarea>
+								</div>
 
-					<div class="responsive-iframe-container">
-						<iframe
-							src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d26798.04777036753!2d-68.8606224246806!3d-32.90461967287454!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1splaza%20independencia%20mendoza!5e0!3m2!1ses-419!2sar!4v1722574139769!5m2!1ses-419!2sar"
-							width="600"
-							height="450"
-							style="border: 0"
-							allowfullscreen=""
-							loading="lazy"
-							referrerpolicy="no-referrer-when-downgrade"
-							title="Google Maps - Plaza Independencia, Mendoza"
-						></iframe>
+								<div class="button-group">
+									<button class="submit-button" type="submit" disabled>
+										Enviar
+									</button>
+									<button class="reset-button" type="reset">Borrar</button>
+								</div>
+							</form>
+							<div id="spinner" class="spinner-container">
+								<div class="sk-chase">
+									<div class="sk-chase-dot"></div>
+									<div class="sk-chase-dot"></div>
+									<div class="sk-chase-dot"></div>
+									<div class="sk-chase-dot"></div>
+									<div class="sk-chase-dot"></div>
+									<div class="sk-chase-dot"></div>
+								</div>
+							</div>
+						</div>
+
+						<div class="contact-info">
+							<p>Correo electrónico: contacto@pcgames.com</p>
+							<p>Teléfono: +55 5555 5555</p>
+							<p>Dirección: Chile 1199 - PLaza Independencia - Mza</p>
+						</div>
+
+						<div class="responsive-iframe-container">
+							<iframe
+								src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d26798.04777036753!2d-68.8606224246806!3d-32.90461967287454!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1splaza%20independencia%20mendoza!5e0!3m2!1ses-419!2sar!4v1722574139769!5m2!1ses-419!2sar"
+								width="600"
+								height="450"
+								style="border: 0"
+								allowfullscreen=""
+								loading="lazy"
+								referrerpolicy="no-referrer-when-downgrade"
+								title="Google Maps - Plaza Independencia, Mendoza"
+							></iframe>
+						</div>
 					</div>
-				</div>
+				</section>
 			</section>
 		</main>
 		<footer id="footer">

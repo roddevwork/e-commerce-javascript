@@ -1,8 +1,18 @@
 {
 	"rewrites": [
 		{
+			"source": "/login",
+			"destination": "/src/pages/login.html"
+		},
+		{
+			"source": "/sigin",
+			"destination": "/src/pages/sigin.html"
+		},
+		{
 			"source": "/(.*)",
 			"destination": "/index.html"
 		}
 	]
 }
+
+/* /login y /sigin serán redirigidas a sus respectivos archivos HTML, mientras que cualquier otra ruta será redirigida al index.html para manejarla desde el cliente. */
