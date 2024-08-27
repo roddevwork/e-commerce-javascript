@@ -7,7 +7,9 @@ export default defineConfig({
 		outDir: 'dist', // El directorio de salida para la construcción
 		rollupOptions: {
 			input: {
-				main: resolve(__dirname, 'index.html')
+				main: resolve(__dirname, 'index.html'),
+				login: resolve(__dirname, 'src/pages/login.html'),
+				sigin: resolve(__dirname, 'src/pages/sigin.html')
 			}
 		}
 	},
