@@ -2,7 +2,11 @@ import { appState, productsData } from './src/js/data.js'
 
 // Elementos relacionados con el menú hamburguesa
 const menuBtn = document.querySelector('#menu-btn')
-const menu = document.querySelector('#nav-menu')
+const menuNav = document.querySelector('#nav-menu')
+
+// Elementos relacionados con el carrito
+const shoppingCart = document.querySelector('.shopping-cart')
+const cartMenu = document.querySelector('.cart-menu')
 
 // Elementos relacionados con los productos
 const productsContainer = document.querySelector('.cards-container')
@@ -40,13 +44,16 @@ const saveCartToLocalStorage = () => {
 
 // Función para manejar el menú hamburguesa
 const handleMenuToggle = () => {
-	menu.classList.toggle('menu-open')
+	menuNav.classList.toggle('menu-open')
 	menuBtn.classList.toggle('menu-btn-active')
+	if (cartMenu.style.display === 'flex') {
+		cartMenu.style.display = 'none'
+	}
 }
 
 // Función para manejar el cierre del menú al hacer clic en un enlace
 const handleMenuItemClick = () => {
-	menu.classList.remove('menu-open')
+	menuNav.classList.remove('menu-open')
 	menuBtn.classList.toggle('menu-btn-active')
 }
 
@@ -247,18 +254,49 @@ const enviarEmail = (e) => {
 	}, 3000)
 }
 
+// Funciones para manejar el menú Carrito
+const toggleShoppingCart = () => {
+	if (cartMenu.style.display === 'none' || cartMenu.style.display === '') {
+		cartMenu.style.display = 'flex'
+	} else {
+		cartMenu.style.display = 'none'
+	}
+	if (menuNav.classList.contains('menu-open')) {
+		menuNav.classList.remove('menu-open')
+	}
+}
+
+// Funcion para cerrar los Menus
+const closeAnyMenu = (e) => {
+	// Verifica si el clic no es dentro del header
+	if (!header.contains(e.target)) {
+		// Oculta el cartMenu si está visible
+		if (cartMenu.style.display === 'flex') {
+			cartMenu.style.display = 'none'
+		}
+
+		// Cierra el menú de navegación si está abierto
+		if (menuNav.classList.contains('menu-open')) {
+			menuNav.classList.remove('menu-open')
+		}
+	}
+}
+
 // Funcion Inicial
 const initializeApp = () => {
-	// Inicialización del menú hamburguesa
+	document.addEventListener('click', closeAnyMenu)
+
+	// Menú hamburguesa
 	menuBtn.addEventListener('click', handleMenuToggle)
-	menu.querySelectorAll('a').forEach((link) => {
+	menuNav.querySelectorAll('a').forEach((link) => {
 		link.addEventListener('click', handleMenuItemClick)
 	})
-	// Inicialización de los productos
+	// Productos
 	renderProductsToDOM(appState.products[0])
 	showMoreCardsBtn.addEventListener('click', handleShowMoreProducts)
 	categoriesContainer.addEventListener('click', applyFilter)
 
+	// Validacion del formulario
 	if (contactForm) {
 		inputName.addEventListener('blur', validar)
 		inputLastName.addEventListener('blur', validar)
@@ -268,5 +306,8 @@ const initializeApp = () => {
 		contactForm.addEventListener('submit', enviarEmail)
 		btnReset.addEventListener('click', resetForm)
 	}
+
+	// Carrito de compras
+	shoppingCart.addEventListener('click', toggleShoppingCart)
 }
 initializeApp()

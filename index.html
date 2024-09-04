@@ -22,22 +22,54 @@
 
 	<body>
 		<header id="header">
-			<div class="header-logo">
-				<a href="#hero">
-					<img src="src/assets/img/logo.png" alt="Logo de PC Games" />
-				</a>
+			<div class="header-container">
+
+				<div class="header-logo">
+					<a href="#hero">
+						<img src="src/assets/img/logo.png" alt="Logo de PC Games" />
+					</a>
+				</div>
+	
+				<nav>
+					<ul id="nav-menu" class="nav-menu">
+						<li><a href="#hero">Inicio</a></li>
+						<li><a href="#about">Nosotros</a></li>
+						<li><a href="#products">Productos</a></li>
+						<li><a href="#contact">Contacto</a></li>
+						<li><a href="src/pages/login.html">Iniciar Sesión</a></li>
+						<li><a href="src/pages/sigin.html">Registrarse</a></li>
+					</ul>
+				</nav>
+
+				<!-- Cart Menu -->
+				<div id="cart-menu" class="cart-menu ">
+					<h3>Tu Carrito</h3>
+					<ul id="cart-items" class="cart-items">
+				 	 <!-- Aquí se listarán los productos -->
+	  				<li>Producto 1 - $10.00</li>
+	 				 <li>Producto 2 - $20.00</li>
+					</ul>
+					<div class="cart-total">
+	 					 <span>Total:</span>
+  						<span id="cart-total-amount">$30.00</span>
+					</div>
+					<div class="cart-actions">
+					 	 <button id="checkout-btn" class="btn">Comprar</button>
+ 						 <button id="empty-cart-btn" class="btn">Vaciar</button>
+					</div>
+ 				 </div>
+	
+				<div class="header-actions">
+					<div class="shopping-cart" id="cart-btn">
+					  🛒<span id="cart-count">(0)</span>
+					</div>
+					<button id="menu-btn" class="menu-btn">☰</button>
+				  </div>
+				</div>
+	
 			</div>
-			<nav>
-				<button id="menu-btn" class="menu-btn">☰</button>
-				<ul id="nav-menu" class="nav-menu">
-					<li><a href="#hero">Inicio</a></li>
-					<li><a href="#about">Nosotros</a></li>
-					<li><a href="#products">Productos</a></li>
-					<li><a href="#contact">Contacto</a></li>
-					<li><a href="src/pages/login.html">Iniciar Sesión</a></li>
-					<li><a href="src/pages/sigin.html">Registrarse</a></li>
-				</ul>
-			</nav>
+			
+			<div class="overlay"></div>
 		</header>
 
 		<main id="main">
@@ -90,7 +122,7 @@
 			</section>
 
 			<section id="products" class="section-global">
-				<h2 class="products-title">Nuestros Productos</h2>
+				<h2 class="products-title">Juegos PC</h2>
 				<div class="categories-container">
 					<button class="category card-btn active">Todas</button>
 					<button class="category card-btn" data-category="aventuras">
@@ -123,10 +155,6 @@
 
 			<section id="contact" class="section-global">
 				<h2 class="contact-title">Contáctanos</h2>
-
-				<section id="contact" class="section-global">
-					<h2 class="contact-title">Contáctanos</h2>
-
 					<div class="contact-container">
 						<div class="form-container">
 							<form id="contact-form" class="contact-form">

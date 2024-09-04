@@ -56,6 +56,12 @@
 	.contact-title {
 		font-size: 1.8rem;
 	}
+	.form-container {
+		padding: 10px;
+	}
+	.form-group {
+		padding: 0 20px;
+	}
 
 	/* footer */
 	.footer {
