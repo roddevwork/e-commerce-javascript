@@ -59,6 +59,42 @@ body {
 	color: var(--primary-color) !important;
 	background-color: var(--bg-color-secondary) !important;
 }
+.disabled {
+	pointer-events: none; /* Evita que el botón sea clickeable */
+	opacity: 0.5;
+	background-color: #ccc;
+	cursor: not-allowed;
+}
+/* Estilos base del modal */
+.modal-success {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: #28a745;
+	color: var(--primary-text);
+	padding: 1rem 2rem;
+	border-radius: 8px;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+	visibility: hidden;
+	opacity: 0;
+	transition: visibility 0s, opacity 0.3s ease-out, transform 0.3s ease-out;
+	z-index: 1000;
+	font-size: 1.2rem;
+}
+
+/* Estilos cuando el modal está activo */
+.active-modal {
+	visibility: visible;
+	opacity: 1;
+	transform: translate(-50%, -50%) scale(1); /* Sin escala (normal) */
+}
+
+/* Animación suave para aparecer */
+.modal-success.active-modal {
+	transform: translate(-50%, -50%) scale(1.05); /* Un pequeño zoom para la animación */
+	animation: pop-in 0.3s ease forwards;
+}
 
 /* -> Header */
 #header {
@@ -78,9 +114,32 @@ body {
 	align-items: center;
 }
 
+.header-logo {
+	position: relative;
+	display: inline-block;
+}
 .header-logo img {
 	width: 50px;
-	height: auto;
+}
+
+.header-logo::after {
+	content: 'Inicio';
+	position: absolute;
+	bottom: -30px;
+	left: 50%;
+	transform: translateX(-50%);
+	background-color: rgba(0, 0, 0, 0.7);
+	color: var(--primary-text);
+	padding: 5px 10px;
+	border-radius: 5px;
+	font-size: 14px;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.3s ease-in-out;
+}
+
+.header-logo:hover::after {
+	opacity: 1;
 }
 
 /* Navigation styling */
@@ -112,6 +171,7 @@ body {
 	color: var(--primary-color);
 }
 
+/* Shopping cart and menu button styling */
 .header-actions {
 	display: flex;
 	align-items: center;
@@ -135,7 +195,6 @@ body {
 .menu-btn:hover {
 	color: var(--primary-text);
 }
-/* Shopping cart and menu button styling */
 .shopping-cart {
 	font-size: 2rem;
 	color: var(--primary-color);
@@ -149,50 +208,50 @@ body {
 .shopping-cart span {
 	font-size: 1.5rem;
 }
-
 .menu-open {
 	display: flex;
 	flex-direction: column;
 }
 
+/* Estilos del carrito */
 .cart-menu {
 	display: none;
 	flex-direction: column;
-	background-color: var(--bg-color-secondary);
-	color: #fff;
 	position: absolute;
 	top: var(--header-height);
-	right: 20px;
+	right: 10px;
 	width: 300px;
-	padding: 15px;
+	height: 430px;
+	padding: 5px;
 	border-radius: 5px;
+	color: var(--primary-text);
+	background-color: var(--bg-color-secondary);
 	box-shadow: 0 4px 8px rgba(255, 255, 0, 0.2);
 	z-index: 9;
-}
-.cart-menu h3 {
-	margin-top: 0;
-	border-bottom: 1px solid #555;
-	padding-bottom: 10px;
-}
 
+	@media screen and (width <= 350px) {
+		width: 250px;
+		right: 5px;
+	}
+}
+.cart-menu .cart-title {
+	margin-top: 0;
+	padding-left: 5px;
+	padding-bottom: 3px;
+}
 .cart-items {
-	list-style: none;
+	display: flex;
 	padding: 0;
-	margin: 15px 0;
-	max-height: 200px;
+	margin: 10px 0;
+	width: 100%;
+	max-height: 300px;
 	overflow-y: auto;
 }
-
-.cart-items li {
-	padding: 5px 0;
-	border-bottom: 1px solid #555;
-}
-
 .cart-total {
 	display: flex;
 	justify-content: space-between;
 	font-weight: bold;
-	padding-top: 10px;
+	padding-top: 8px;
 	border-top: 1px solid #555;
 }
 
@@ -202,30 +261,70 @@ body {
 	margin-top: 15px;
 }
 
-.cart-actions .btn {
-	background-color: var(--bg-color-third);
-	color: var(--primary-text);
+.cart-actions .cart-btn {
 	border: none;
 	padding: 10px;
 	border-radius: 3px;
 	cursor: pointer;
+	color: var(--primary-text);
+	background-color: var(--bg-color-third);
 }
 
-.cart-actions .btn:hover {
-	background-color: var(--bg-color-secondary);
+.cart-actions .cart-btn:hover {
 	border: 1px solid var(--primary-color);
 	color: var(--primary-color);
+	background-color: var(--bg-color-secondary);
 }
 
-.overlay {
-	display: none;
-	position: absolute;
-	top: var(--header-height);
-	left: 0;
-	height: 100vh;
-	width: 100%;
-	z-index: 1;
-	background-color: var(--bg-color-primary);
+/* Productos renderizados */
+.cart-container {
+	padding: 5px;
+	max-height: 370px;
+	overflow-y: auto;
+}
+.cart-item {
+	display: flex;
+	gap: 5px;
+	margin-bottom: 10px;
+	padding: 5px;
+	border: 1px solid var(--primary-text);
+	border-radius: 5px;
+}
+.cart-item img {
+	width: 60px;
+	height: 85px;
+	border-radius: 5px;
+}
+.cart-item-info {
+}
+.cart-item-title {
+	font-size: 1rem;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+.cart-item-price {
+	font-size: 1rem;
+	margin-bottom: 3px;
+}
+.remove-btn {
+	visibility: hidden;
+}
+.cart-handler {
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	gap: 10px;
+}
+.quantity-handler-down,
+.quantity-handler-up {
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
+	padding: 5px 10px;
+	border: 1px solid var(--primary-text);
+	border-radius: 5px;
+	text-align: center;
 }
 
 /* -> Hero Section */

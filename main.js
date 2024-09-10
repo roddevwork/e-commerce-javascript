@@ -8,6 +8,13 @@ const menuNav = document.querySelector('#nav-menu')
 const shoppingCart = document.querySelector('.shopping-cart')
 const cartMenu = document.querySelector('.cart-menu')
 
+const productsCart = document.querySelector('.cart-container')
+const cartTotalAmount = document.querySelector('.cart-total-amount')
+const cartCount = document.querySelector('.cart-count')
+const buyCartBtn = document.querySelector('#buy-cart-btn')
+const emptyCartBtn = document.querySelector('#empty-cart-btn')
+const successMessage = document.querySelector('#show-msg')
+
 // Elementos relacionados con los productos
 const productsContainer = document.querySelector('.cards-container')
 const showMoreCardsBtn = document.querySelector('.btn-load')
@@ -32,16 +39,19 @@ const emailObj = {
 	mensaje: ''
 }
 
-//  Local Storage
-let cart = JSON.parse(localStorage.getItem('cart')) || []
-
 // -> Funciones:
-
+//
+// -> LocalStorage
+// Inicializar el carrito desde localStorage o como un array vacío
+let cart = JSON.parse(localStorage.getItem('cart')) || []
 // Funcion para guardar carrito en el localstorage
 const saveCartToLocalStorage = () => {
 	localStorage.setItem('cart', JSON.stringify(cart))
 }
-
+// localStorage.clear()
+//
+// -> Menu hamburguesa
+//
 // Función para manejar el menú hamburguesa
 const handleMenuToggle = () => {
 	menuNav.classList.toggle('menu-open')
@@ -56,19 +66,24 @@ const handleMenuItemClick = () => {
 	menuNav.classList.remove('menu-open')
 	menuBtn.classList.toggle('menu-btn-active')
 }
-
+//
+// -> Productos
+//
 // Funcion crear template producto
 const generateProductCardHTML = (product) => {
-	const { id, title, img, price, price_offer } = product
-
+	const { id, title, price, offer, img } = product
+	const finalPrice = offer
+		? `Comprar ahora $${offer}`
+		: `Comprar ahora $${price}`
 	return `<div class="card">
-    <img src="${img}" alt="${title}" />
-    <h3>${title}</h3>
-    <p>$${price}</p>
-    <button class="card-btn" data-id="${id}">
-        ${price_offer ? `Comprar ahora - $${price_offer}` : 'Comprar ahora'}    
-    </button>
-</div>`
+		<img src="${img}" alt="${title}" />
+		<h3>${title}</h3>
+		<p>$${price}</p>
+		<button class="card-btn" data-id="${id}" data-title="${title}" data-price="${price}"
+			data-img="${img}" ${offer ? `data-offer="${offer}"` : ''}>
+			    ${finalPrice}
+		</button>
+	</div>`
 }
 
 // Funcion renderizar productos en carrito
@@ -157,7 +172,9 @@ const renderFilteredProducts = () => {
 	})
 	renderProductsToDOM(filteredProducts)
 }
-
+//
+// -> Formulario de contacto
+//
 // Funcion para validar el email
 const validar = (e) => {
 	const campo = e.target.id.toUpperCase()
@@ -253,8 +270,10 @@ const enviarEmail = (e) => {
 		}, 3000)
 	}, 3000)
 }
-
-// Funciones para manejar el menú Carrito
+//
+// -> Shopping cart
+//
+// Funcion para manejar el menú Carrito
 const toggleShoppingCart = () => {
 	if (cartMenu.style.display === 'none' || cartMenu.style.display === '') {
 		cartMenu.style.display = 'flex'
@@ -279,6 +298,132 @@ const closeAnyMenu = (e) => {
 		if (menuNav.classList.contains('menu-open')) {
 			menuNav.classList.remove('menu-open')
 		}
+	}
+}
+// Funcion que devuelve un template de los items del carrito
+const createCartProductsTemplate = (cartProduct) => {
+	const { id, title, price, offer, quantity, img } = cartProduct
+	const finalPrice = offer !== null && offer !== undefined ? offer : price
+	return `
+	    <div class="cart-item" data-id="${id}">
+      		 <img class="cart-item-img" src="${img}" alt="${title}">
+     		 <div class="cart-item-info">
+       			 <h3 class="cart-item-title">${title}</h3>
+        		 <p class="cart-item-price">Precio: $${finalPrice}</p>
+       			 <p class="cart-item-quantity">Cantidad: ${quantity}</p>
+       			 <button class="remove-btn" data-id="${id}">Eliminar</button> 
+				 <div class="cart-handler">
+       			 	<span class="quantity-handler-down" data-id="${id}">-</span>
+        			<span class="item-quantity">${quantity}</span>
+       			 	<span class="quantity-handler-up" data-id="${id}">+</span>
+     		 	 </div>
+     		 </div>
+     		 
+    	</div>`
+}
+
+// Funcion que renderiza los item del carrito
+const renderCart = () => {
+	if (!cart.length) {
+		const emptyMessage = document.createElement('P')
+		emptyMessage.classList.add('empty-cart-message')
+		emptyMessage.textContent = 'Tu carrito está vacío'
+		productsCart.appendChild(emptyMessage)
+		return
+	}
+	productsCart.innerHTML = cart.map(createCartProductsTemplate).join('')
+}
+
+// Funcion que obtiene el total de la compra
+const getCartTotalAmount = () => {
+	return cart.reduce(
+		(acc, curr) => acc + (curr.offer ? curr.offer : curr.price) * curr.quantity,
+		0
+	)
+}
+// Funcion que renderiza la cantidad total del carrito
+const renderCartTotalAmount = () => {
+	cartTotalAmount.innerHTML = `$${getCartTotalAmount().toFixed(2)}`
+}
+
+// Funcion que renderiza el contador del carrito
+const renderCartCount = () => {
+	cartCount.textContent = cart.reduce(
+		(acc, curr) => acc + Number(curr.quantity),
+		0
+	)
+}
+//  Funcion que chequea el estado de los botones
+const disableBtn = (btn) => {
+	if (!cart.length) {
+		btn.classList.add('disabled')
+	} else {
+		btn.classList.remove('disabled')
+	}
+}
+// Funcion que actualiza el estado del carrito
+const updateCartState = () => {
+	saveCartToLocalStorage()
+	renderCart()
+	renderCartTotalAmount()
+	disableBtn(buyCartBtn)
+	disableBtn(emptyCartBtn)
+	renderCartCount()
+}
+
+// Funcion para agregar al carrito
+const addProductToCart = (e) => {
+	if (!e.target.classList.contains('card-btn')) {
+		return
+	}
+	const product = createProductData(e.target.dataset)
+	if (isExistingCartProduct(product)) {
+		addUnitToProduct(product) // Agrega una unidad
+		showModalSuccess(`Se agregó una unidad del producto al carrito`)
+	} else {
+		createCartProduct(product) // Crea el producto
+		showModalSuccess(`El producto se agregó al carrito`)
+	}
+
+	updateCartState() // Actualiza el estado del carrito
+}
+// Funcion para mostrar el modal
+const showModalSuccess = (message) => {
+	successMessage.classList.add('active-modal')
+	successMessage.textContent = message
+
+	setTimeout(() => {
+		successMessage.classList.remove('active-modal')
+	}, 2000)
+}
+
+// Funcion para crear el producto
+const createCartProduct = (product) => {
+	cart = [...cart, { ...product, quantity: 1 }]
+}
+// Funcion para agregar una unidad al producto
+const addUnitToProduct = (product) => {
+	cart = cart.map((cartProduct) => {
+		if (cartProduct.id === product.id) {
+			return { ...cartProduct, quantity: cartProduct.quantity + 1 }
+		} else {
+			return cartProduct
+		}
+	})
+}
+// Funcion para validar si el producto ya existe en el carrito
+const isExistingCartProduct = (product) => {
+	return cart.find((item) => item.id === product.id)
+}
+//
+const createProductData = (product) => {
+	const { id, title, price, offer, img } = product
+	return {
+		id,
+		title,
+		price: Number(price),
+		offer: offer ? Number(offer) : null,
+		img
 	}
 }
 
@@ -309,5 +454,11 @@ const initializeApp = () => {
 
 	// Carrito de compras
 	shoppingCart.addEventListener('click', toggleShoppingCart)
+	document.addEventListener('DOMContentLoaded', renderCart)
+	document.addEventListener('DOMContentLoaded', renderCartTotalAmount)
+	disableBtn(buyCartBtn)
+	disableBtn(emptyCartBtn)
+	renderCartCount()
+	productsContainer.addEventListener('click', addProductToCart)
 }
 initializeApp()

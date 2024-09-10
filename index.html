@@ -43,31 +43,30 @@
 
 				<!-- Cart Menu -->
 				<div id="cart-menu" class="cart-menu ">
-					<h3>Tu Carrito</h3>
+					<h3 class="cart-title">Tu Carrito</h3>
 					<ul id="cart-items" class="cart-items">
-				 	 <!-- Aquí se listarán los productos -->
-	  				<li>Producto 1 - $10.00</li>
-	 				 <li>Producto 2 - $20.00</li>
+						<li class="cart-container">	
+						</li>
 					</ul>
 					<div class="cart-total">
-	 					 <span>Total:</span>
-  						<span id="cart-total-amount">$30.00</span>
+	 					 <p>Total:</p>
+  						<span class="cart-total-amount">$10.00</span>
 					</div>
 					<div class="cart-actions">
-					 	 <button id="checkout-btn" class="btn">Comprar</button>
- 						 <button id="empty-cart-btn" class="btn">Vaciar</button>
+					 	 <button id="buy-cart-btn" class="cart-btn">Comprar</button>
+ 						 <button id="empty-cart-btn" class="cart-btn">Vaciar</button>
 					</div>
  				 </div>
 	
 				<div class="header-actions">
 					<div class="shopping-cart" id="cart-btn">
-					  🛒<span id="cart-count">(0)</span>
+					  🛒<span>(<span class="cart-count">0</span>)</span>
 					</div>
 					<button id="menu-btn" class="menu-btn">☰</button>
 				  </div>
-				</div>
-	
 			</div>
+	
+			
 			
 			<div class="overlay"></div>
 		</header>
@@ -261,6 +260,7 @@
 				</p>
 			</div>
 		</footer>
+		<div id="show-msg" class=" modal-success"></div>
 		<script type="module" src="./src/js/data.js"></script>
 		<script type="module" src="./main.js"></script>
 	</body>
