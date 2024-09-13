@@ -221,7 +221,7 @@ body {
 	top: var(--header-height);
 	right: 10px;
 	width: 300px;
-	height: 430px;
+	max-height: 430px;
 	padding: 5px;
 	border-radius: 5px;
 	color: var(--primary-text);

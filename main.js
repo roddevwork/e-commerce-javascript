@@ -7,7 +7,6 @@ const menuNav = document.querySelector('#nav-menu')
 // Elementos relacionados con el carrito
 const shoppingCart = document.querySelector('.shopping-cart')
 const cartMenu = document.querySelector('.cart-menu')
-
 const productsCart = document.querySelector('.cart-container')
 const cartTotalAmount = document.querySelector('.cart-total-amount')
 const cartCount = document.querySelector('.cart-count')
@@ -313,9 +312,9 @@ const createCartProductsTemplate = (cartProduct) => {
        			 <p class="cart-item-quantity">Cantidad: ${quantity}</p>
        			 <button class="remove-btn" data-id="${id}">Eliminar</button> 
 				 <div class="cart-handler">
-       			 	<span class="quantity-handler-down" data-id="${id}">-</span>
+       			 	<span class="quantity-handler-down less-btn" data-id="${id}">-</span>
         			<span class="item-quantity">${quantity}</span>
-       			 	<span class="quantity-handler-up" data-id="${id}">+</span>
+       			 	<span class="quantity-handler-up plus-btn" data-id="${id}">+</span>
      		 	 </div>
      		 </div>
      		 
@@ -426,10 +425,71 @@ const createProductData = (product) => {
 		img
 	}
 }
+// Funcion para cambiar la cantidad del item
+const handleQuantity = (e) => {
+	if (e.target.classList.contains('less-btn')) {
+		handleLessBtnEvent(e.target.dataset.id)
+	} else if (e.target.classList.contains('plus-btn')) {
+		handlePLusBtnEvent(e.target.dataset.id)
+	}
+	updateCartState()
+}
+
+// Funcion para manejar el boton del menos
+const handleLessBtnEvent = (id) => {
+	const existingCartProduct = cart.find((item) => item.id === id)
+
+	if (existingCartProduct.quantity === 1) {
+		if (window.confirm('¿Deseas eliminar este item del carrito?')) {
+			removeProductFromCart(existingCartProduct)
+		}
+		return
+	}
+	substractProductUnit(existingCartProduct)
+}
+
+const substractProductUnit = (existingProduct) => {
+	cart = cart.map((product) => {
+		return product.id === existingProduct.id
+			? { ...product, quantity: product.quantity - 1 }
+			: product
+	})
+}
+
+const removeProductFromCart = (existingProduct) => {
+	cart = cart.filter((product) => product.id !== existingProduct.id)
+	updateCartState()
+}
+
+const handlePLusBtnEvent = (id) => {
+	const existingCartProduct = cart.find((item) => item.id === id)
+	addUnitToProduct(existingCartProduct)
+}
+
+const resetCartItems = () => {
+	cart = []
+	updateCartState()
+}
+// Funcion para completa una accion en el carrito
+const completeCartAction = (confirmMsg, successMsg) => {
+	if (!cart.length) return
+
+	if (window.confirm(confirmMsg)) {
+		resetCartItems()
+		alert(successMsg)
+	}
+}
+const completeBuy = () => {
+	completeCartAction('¿Deseas efectuar su compra?', 'Gracias por tu compra!')
+}
+
+const deleteCart = () => {
+	completeCartAction('¿Deseas vaciar el carrito?', 'Carrito vaciado')
+}
 
 // Funcion Inicial
 const initializeApp = () => {
-	document.addEventListener('click', closeAnyMenu)
+	// document.addEventListener('click', closeAnyMenu)
 
 	// Menú hamburguesa
 	menuBtn.addEventListener('click', handleMenuToggle)
@@ -460,5 +520,9 @@ const initializeApp = () => {
 	disableBtn(emptyCartBtn)
 	renderCartCount()
 	productsContainer.addEventListener('click', addProductToCart)
+	productsCart.addEventListener('click', handleQuantity)
+	buyCartBtn.addEventListener('click', completeBuy)
+	emptyCartBtn.addEventListener('click', deleteCart)
 }
+
 initializeApp()
