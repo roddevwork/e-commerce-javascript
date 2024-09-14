@@ -442,6 +442,11 @@ const handleLessBtnEvent = (id) => {
 	if (existingCartProduct.quantity === 1) {
 		if (window.confirm('¿Deseas eliminar este item del carrito?')) {
 			removeProductFromCart(existingCartProduct)
+			if (!cart.length) {
+				setTimeout(() => {
+					location.reload()
+				}, 1000)
+			}
 		}
 		return
 	}
@@ -469,6 +474,9 @@ const handlePLusBtnEvent = (id) => {
 const resetCartItems = () => {
 	cart = []
 	updateCartState()
+	setTimeout(() => {
+		location.reload()
+	}, 1000)
 }
 // Funcion para completa una accion en el carrito
 const completeCartAction = (confirmMsg, successMsg) => {
